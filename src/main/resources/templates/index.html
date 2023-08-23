@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Página de Inicio</title>
+
+  <style>
+    body {
+      background-color: #f0f8ff; /* Celeste claro */
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 36px;
+      text-align: center;
+      margin-top: 80px; /* Ajustar la distancia superior */
+      color: #333; /* Color de texto */
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start; /* Cambio aquí */
+      margin-top: 30px; /* Ajustar la distancia superior */
+    }
+
+    li {
+      margin: 10px;
+    }
+
+    a {
+      display: block;
+      padding: 20px 40px;
+      background-color: #007bff; /* Azul */
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      text-align: center;
+      transition: background-color 0.3s;
+    }
+
+    a:hover {
+      background-color: #0056b3; /* Azul oscuro */
+    }
+  </style>
+
+</head>
+<body>
+<h1>EXAMEN PRUEBA TECHPLUS - RAFAEL CS.</h1>
+<ul>
+  <li><a th:href="@{/api/mascotas/listarMascotas}">Mostrar Mascotas</a></li>
+  <li><a th:href="@{/api/datos-raza/listarRazas}">Mostrar Razas</a></li>
+  <li><a th:href="@{/api/datos-propietario/listarPropietarios}">Mostrar Propietarios</a></li>
+  <li><a th:href="@{/api/datos-tamano/listarTamanos}">Mostrar Tamanos inventariados</a></li>
+</ul>
+</body>
+</html>

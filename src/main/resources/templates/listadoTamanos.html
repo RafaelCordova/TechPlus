@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Listado de Tamanos</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+<h1>Tamanos Inventariados</h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="tamano : ${tamanos}">
+    <td th:text="${tamano.id}"></td>
+    <td th:text="${tamano.nombre}"></td>
+    <td>
+      <a th:href="@{/api/datos-tamano/editarTamano/{id}(id=${tamano.id})}">Editar</a>
+      <a href="#" class="eliminar-link" th:attr="data-id=${tamano.id}">Eliminar</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+
+<a th:href="@{/api/datos-tamano/formularioTamano}" class="btn-nuevo">Nuevo Tamaño</a>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $(".eliminar-link").click(function(e) {
+      e.preventDefault();
+      var tamanoId = $(this).data("id");
+      if (confirm("¿Estás seguro de que deseas eliminar este tamaño?")) {
+        $.ajax({
+          url: "/api/datos-tamano/eliminarTamano/" + tamanoId,
+          type: "DELETE",
+          success: function() {
+            location.reload();
+          },
+          error: function() {
+            // Manejar errores si es necesario
+          }
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

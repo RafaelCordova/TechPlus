@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Ingreso de Mascota</title>
+
+  <style>
+    /* Estilos generales */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    #container {
+      width: 80%;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    /* Estilos para la sección de datosInternamiento */
+    #datosInternamiento {
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+
+    /* Estilos para la sección de historial de vacunas */
+    #historialVacunas {
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+
+    .vacuna {
+      margin-bottom: 10px;
+    }
+
+    #agregarVacuna {
+      display: block;
+      margin: 10px auto;
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Estilos para el botón de guardar */
+    button[type="submit"] {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+<body>
+<h1>Ingreso de Mascota</h1>
+
+<form th:action="@{/api/mascotas/guardarMascota}" method="post">
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" name="informacionGeneral.nombre" /><br/>
+
+  <label for="sexo">Sexo:</label>
+  <input type="text" id="sexo" name="informacionGeneral.sexo" /><br/>
+
+  <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+  <input type="date" id="fechaNacimiento" name="informacionGeneral.fechaNacimiento" /><br/>
+
+  <label for="peso">Peso:</label>
+  <input type="text" id="peso" name="informacionGeneral.peso" /><br/>
+
+  <label for="foto">Foto:</label>
+  <input type="text" id="foto" name="informacionGeneral.foto" /><br/>
+
+  <h2>Informacion General Mascota</h2>
+  <label for="raza">Raza:</label>
+  <select id="raza" name="raza.id">
+    <option th:each="raza : ${razas}" th:value="${raza.id}" th:text="${raza.nombre}"></option>
+  </select><br/>
+
+  <label for="tamano">Tamanio:</label>
+  <select id="tamano" name="tamano.id">
+    <option th:each="tamano : ${tamanos}" th:value="${tamano.id}" th:text="${tamano.nombre}"></option>
+  </select><br/>
+
+  <label for="alergias">Alergias:</label>
+  <input type="text" id="alergias" name="alergias" /><br/>
+
+  <label for="datosPropietario">Datos Propietario:</label>
+  <select id="datosPropietario" name="datosPropietario.id">
+    <option th:each="propietario : ${propietarios}" th:value="${propietario.id}" th:text="${propietario.apellidosNombres}"></option>
+  </select><br/>
+
+  <!-- datosInternamiento -->
+  <h2>Datos de Internamiento</h2>
+
+  <label for="motivo">Motivo de Internamiento:</label>
+  <input type="text" id="motivo" name="datosInternamiento.motivo" /><br/>
+
+  <label for="fechaIngreso">Fecha de Ingreso:</label>
+  <input type="date" id="fechaIngreso" name="datosInternamiento.fechaIngreso" /><br/>
+
+  <label for="fechaSalida">Fecha de Salida:</label>
+  <input type="date" id="fechaSalida" name="datosInternamiento.fechaSalida" /><br/>
+
+  <label for="pesoIngreso">Peso de Ingreso:</label>
+  <input type="text" id="pesoIngreso" name="datosInternamiento.pesoIngreso" /><br/>
+
+  <label for="temperaturaIngreso">Temperatura de Ingreso:</label>
+  <input type="text" id="temperaturaIngreso" name="datosInternamiento.temperaturaIngreso" /><br/>
+
+  <label for="diagnostico">Diagnostico:</label>
+  <input type="text" id="diagnostico" name="datosInternamiento.diagnostico" /><br/>
+
+  <label for="comentarios">Comentarios:</label>
+  <input type="text" id="comentarios" name="datosInternamiento.comentarios" /><br/>
+
+  <label for="totalPagar">Total a Pagar:</label>
+  <input type="text" id="totalPagar" name="datosInternamiento.totalPagar" /><br/>
+
+  <h2></h2>
+  <h2>Historial VACUNAS mascota</h2>
+
+  <div id="vacunas">
+    <div class="vacuna">
+      <label for="fecha">Fecha:</label>
+      <input type="date" name=""  />
+      <label for="tipo">Tipo:</label>
+      <input type="text" name=""  />
+      <label for="comentarios">Comentarios:</label>
+      <input type="text" name="" />
+    </div>
+  </div>
+  <button type="button" id="agregarVacuna">Agregar Vacuna</button>
+
+  <button type="submit">Guardar Mascota</button>
+</form>
+</body>
+</html>

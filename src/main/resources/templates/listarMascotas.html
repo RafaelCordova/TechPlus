@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Vet-Mascotas</title>
+</head>
+<body>
+<h1>Mascotas Inventario</h1>
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+</style>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Raza</th>
+    <th>Tamano</th>
+    <th>Propietario</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="mascota : ${mascotas}">
+    <td th:text="${mascota.id}"></td>
+    <td th:text="${mascota.informacionGeneral.nombre}"></td>
+    <td th:text="${mascota.raza.nombre}"></td>
+    <td th:text="${mascota.tamano.nombre}"></td>
+    <td th:text="${mascota.datosPropietario.numeroDocumento}"></td>
+
+    <td>
+      <a href="#" class="eliminar-link" th:attr="data-id=${mascota.id}">Eliminar</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<a th:href="@{/api/mascotas/formularioMascota}" class="btn-nuevo">Nueva Mascota</a>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $(".eliminar-link").click(function(e) {
+      e.preventDefault();
+      var mascotaId = $(this).data("id");
+      if (confirm("¿Estás seguro de que deseas eliminar esta mascota?")) {
+        $.ajax({
+          url: "/api/mascotas/eliminarMascota/" + mascotaId,
+          type: "DELETE",
+          success: function() {
+            location.reload();
+          },
+          error: function() {
+          }
+        });
+      }
+    });
+  });
+</script>
+</body>
+</html>

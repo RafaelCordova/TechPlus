@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Ingreso de Datos de Propietario</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<h1>Ingreso de Datos de Propietario</h1>
+
+<form th:action="@{/api/datos-propietario/guardarPropietario}" method="post">
+  <label for="tipoDocumento">Tipo de Documento:</label>
+  <input type="text" id="tipoDocumento" name="tipoDocumento" />
+
+  <label for="numeroDocumento">Numero de Documento:</label>
+  <input type="text" id="numeroDocumento" name="numeroDocumento" />
+
+  <label for="apellidosNombres">Apellidos y Nombres:</label>
+  <input type="text" id="apellidosNombres" name="apellidosNombres" />
+
+  <label for="telefono">Telefono:</label>
+  <input type="text" id="telefono" name="telefono" />
+
+  <label for="correo">Correo Electronico:</label>
+  <input type="email" id="correo" name="correo" />
+
+  <label for="direccion">Direccion:</label>
+  <input type="text" id="direccion" name="direccion" />
+
+  <label for="referencia">Referencia:</label>
+  <input type="text" id="referencia" name="referencia" />
+
+  <button type="submit">Guardar Datos de Propietario</button>
+</form>
+</body>
+</html>

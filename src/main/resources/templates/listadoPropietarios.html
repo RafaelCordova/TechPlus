@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Listado de Propietarios</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+<h1>Listado de Propietarios de las Mascotas</h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Tipo Documento</th>
+    <th>Numero Documento</th>
+    <th>Apellidos y Nombres</th>
+    <th>Telefono</th>
+    <th>Correo</th>
+    <th>Direccion</th>
+    <th>Referencia</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="propietario : ${propietarios}">
+    <td th:text="${propietario.id}"></td>
+    <td th:text="${propietario.tipoDocumento}"></td>
+    <td th:text="${propietario.numeroDocumento}"></td>
+    <td th:text="${propietario.apellidosNombres}"></td>
+    <td th:text="${propietario.telefono}"></td>
+    <td th:text="${propietario.correo}"></td>
+    <td th:text="${propietario.direccion}"></td>
+    <td th:text="${propietario.referencia}"></td>
+    <td>
+      <a th:href="@{/api/datos-propietario/editarPropietario/{id}(id=${propietario.id})}">Editar</a>
+      <a href="#" class="eliminar-link" th:attr="data-id=${propietario.id}">Eliminar</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<a th:href="@{/api/datos-propietario/formularioPropietario}" class="btn-nuevo">Registrar Propietario</a>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $(".eliminar-link").click(function(e) {
+      e.preventDefault();
+      var propietarioId = $(this).data("id");
+      if (confirm("¿Estás seguro de que deseas eliminar este propietario?")) {
+        $.ajax({
+          url: "/api/datos-propietario/eliminarPropietario/" + propietarioId,
+          type: "DELETE",
+          success: function() {
+            location.reload();
+          },
+          error: function() {
+            // Manejar errores si es necesario
+          }
+        });
+      }
+    });
+  });
+</script>
+</body>
+</html>
